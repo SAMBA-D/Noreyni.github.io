@@ -1,0 +1,824 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Samba - Data Science Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			/* Animations modernes */
+			@keyframes fadeInUp {
+				from {
+					opacity: 0;
+					transform: translateY(30px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			@keyframes float {
+				0%, 100% { transform: translateY(0px); }
+				50% { transform: translateY(-20px); }
+			}
+
+			@keyframes gradient {
+				0% { background-position: 0% 50%; }
+				50% { background-position: 100% 50%; }
+				100% { background-position: 0% 50%; }
+			}
+
+			@keyframes slideInLeft {
+				from {
+					opacity: 0;
+					transform: translateX(-50px);
+				}
+				to {
+					opacity: 1;
+					transform: translateX(0);
+				}
+			}
+
+			@keyframes scaleIn {
+				from {
+					opacity: 0;
+					transform: scale(0.8);
+				}
+				to {
+					opacity: 1;
+					transform: scale(1);
+				}
+			}
+
+			/* Smooth scroll */
+			html {
+				scroll-behavior: smooth;
+			}
+
+			/* Navigation moderne avec glassmorphism */
+			#nav {
+				backdrop-filter: blur(10px);
+				background-color: rgba(74, 63, 140, 0.85) !important;
+				box-shadow: 0 8px 32px 0 rgba(108, 99, 255, 0.2);
+				border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+				transition: all 0.3s ease;
+			}
+
+			#nav .nav-name a {
+				font-weight: 700;
+				font-size: 1.2em;
+				color: white !important;
+				text-decoration: none;
+				transition: all 0.3s ease;
+				letter-spacing: 0.5px;
+			}
+
+			#nav .nav-name a:hover {
+				color: #8B7FFF !important;
+				text-shadow: 0 0 20px rgba(139, 127, 255, 0.5);
+			}
+
+			#nav.scrolled {
+				box-shadow: 0 8px 32px 0 rgba(108, 99, 255, 0.4);
+			}
+
+			#nav a {
+				position: relative;
+				overflow: hidden;
+				transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			}
+
+			#nav a::before {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				width: 0;
+				height: 2px;
+				background: linear-gradient(90deg, #8B7FFF, #6C63FF);
+				transform: translateX(-50%);
+				transition: width 0.3s ease;
+			}
+
+			#nav a:hover::before {
+				width: 80%;
+			}
+
+			/* Hero section avec gradient animé */
+			#top {
+				background: linear-gradient(-45deg, #4A3F8C, #6C63FF, #8B7FFF, #5850E6);
+				background-size: 400% 400%;
+				animation: gradient 15s ease infinite;
+				position: relative;
+				overflow: hidden;
+			}
+
+			#top::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,128C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+				background-size: cover;
+				opacity: 0.3;
+			}
+
+			#top .container {
+				position: relative;
+				z-index: 1;
+			}
+
+			#top h1 {
+				color: white !important;
+				animation: fadeInUp 1s ease;
+				text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
+			}
+
+			#top p {
+				color: rgba(255, 255, 255, 0.95) !important;
+				animation: fadeInUp 1.2s ease;
+			}
+
+			#top .button {
+				animation: fadeInUp 1.4s ease;
+				box-shadow: 0 8px 20px rgba(108, 99, 255, 0.4);
+				transition: all 0.3s ease;
+			}
+
+			#top .button:hover {
+				transform: translateY(-3px);
+				box-shadow: 0 12px 30px rgba(108, 99, 255, 0.6);
+			}
+
+			/* Photo de profil moderne */
+			.profile-pic {
+				position: relative;
+				animation: float 6s ease-in-out infinite;
+			}
+
+			.profile-pic img {
+				border: 5px solid rgba(255, 255, 255, 0.3);
+				box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3),
+							0 0 0 10px rgba(255, 255, 255, 0.1);
+				transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+			}
+
+			.profile-pic:hover img {
+				transform: scale(1.05);
+				box-shadow: 0 20px 60px rgba(108, 99, 255, 0.4),
+							0 0 0 15px rgba(139, 127, 255, 0.2);
+			}
+
+			/* Cards modernes avec effet hover */
+			.box {
+				transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+				border-radius: 20px !important;
+				overflow: hidden;
+				position: relative;
+				background: white;
+				border: 1px solid rgba(108, 99, 255, 0.1);
+			}
+
+			.box::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(90deg, transparent, rgba(108, 99, 255, 0.1), transparent);
+				transition: left 0.5s ease;
+			}
+
+			.box:hover::before {
+				left: 100%;
+			}
+
+			.box:hover {
+				transform: translateY(-10px);
+				box-shadow: 0 20px 60px rgba(108, 99, 255, 0.25) !important;
+				border-color: rgba(108, 99, 255, 0.3);
+			}
+
+			.box.style1 h3 {
+				background: linear-gradient(135deg, #6C63FF, #8B7FFF);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				background-clip: text;
+				transition: all 0.3s ease;
+				font-weight: 700 !important;
+				font-size: 1.3em !important;
+			}
+
+			/* Force violet pour les titres spécifiques */
+			.box.style1 h3,
+			#work .box h3 {
+				color: #6C63FF !important;
+				background: none !important;
+				-webkit-text-fill-color: #6C63FF !important;
+			}
+
+			.box:hover h3 {
+				transform: scale(1.05);
+			}
+
+			.box .image.featured img {
+				transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+				filter: brightness(0.95);
+			}
+
+			.box:hover .image.featured img {
+				transform: scale(1.1);
+				filter: brightness(1);
+			}
+
+			/* Portfolio cards avec overlay moderne */
+			.box.style2 {
+				position: relative;
+				border-radius: 15px !important;
+				overflow: hidden;
+			}
+
+			.box.style2 .image.featured {
+				position: relative;
+				overflow: hidden;
+			}
+
+			.box.style2 .image.featured::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: linear-gradient(135deg, rgba(108, 99, 255, 0.8), rgba(139, 127, 255, 0.6));
+				opacity: 0;
+				transition: opacity 0.4s ease;
+			}
+
+			.box.style2:hover .image.featured::after {
+				opacity: 1;
+			}
+
+			.box.style2 h3 {
+				transition: all 0.3s ease;
+			}
+
+			.box.style2:hover h3 {
+				color: #6C63FF !important;
+				transform: translateX(5px);
+			}
+
+			/* Formulaire moderne */
+			form input[type=text],
+			form input[type=email],
+			form textarea {
+				border-radius: 12px !important;
+				border: 2px solid rgba(108, 99, 255, 0.2) !important;
+				transition: all 0.3s ease;
+				background: rgba(255, 255, 255, 0.05) !important;
+				color: white !important;
+			}
+
+			form input[type=text]::placeholder,
+			form input[type=email]::placeholder,
+			form textarea::placeholder {
+				color: rgba(255, 255, 255, 0.6) !important;
+			}
+
+			form input[type=text]:focus,
+			form input[type=email]:focus,
+			form textarea:focus {
+				border-color: #6C63FF !important;
+				transform: translateY(-2px);
+				box-shadow: 0 8px 25px rgba(108, 99, 255, 0.15) !important;
+				color: white !important;
+			}
+
+			/* Boutons avec effet moderne */
+			.button {
+				position: relative;
+				overflow: hidden;
+				border-radius: 50px !important;
+				transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+			}
+
+			.button::before {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 0;
+				height: 0;
+				border-radius: 50%;
+				background: rgba(255, 255, 255, 0.2);
+				transform: translate(-50%, -50%);
+				transition: width 0.6s, height 0.6s;
+			}
+
+			.button:hover::before {
+				width: 300px;
+				height: 300px;
+			}
+
+			.button:hover {
+				transform: translateY(-3px);
+				box-shadow: 0 10px 30px rgba(108, 99, 255, 0.4);
+			}
+
+			.button:active {
+				transform: translateY(-1px);
+			}
+
+			/* Social icons modernes */
+			ul.social li a {
+				transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			}
+
+			/* Couleurs réelles des réseaux sociaux */
+			ul.social li a.fa-twitter {
+				background-color: #1DA1F2 !important;
+			}
+
+			ul.social li a.fa-facebook-f {
+				background-color: #1877F2 !important;
+			}
+
+			ul.social li a.fa-whatsapp {
+				background-color: #25D366 !important;
+			}
+
+			ul.social li a.fa-linkedin-in {
+				background-color: #0A66C2 !important;
+			}
+
+			ul.social li a.fa-github {
+				background-color: #181717 !important;
+			}
+
+			ul.social li a.fa-envelope {
+				background-color: #EA4335 !important;
+			}
+
+			ul.social li a:hover {
+				transform: translateY(-8px) rotate(5deg);
+				box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+				filter: brightness(1.1);
+			}
+
+			/* Scroll reveal animations */
+			.fade-in {
+				opacity: 0;
+				animation: fadeInUp 0.8s ease forwards;
+			}
+
+			.fade-in-delay-1 { animation-delay: 0.2s; }
+			.fade-in-delay-2 { animation-delay: 0.4s; }
+			.fade-in-delay-3 { animation-delay: 0.6s; }
+
+			/* Section headers avec underline animé */
+			article header h2 {
+				position: relative;
+				display: inline-block;
+				padding-bottom: 15px;
+			}
+
+			article header h2::after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 0;
+				height: 4px;
+				background: linear-gradient(90deg, #6C63FF, #8B7FFF);
+				border-radius: 2px;
+				animation: expandWidth 1s ease forwards;
+			}
+
+			@keyframes expandWidth {
+				to { width: 100px; }
+			}
+
+			/* Particules d'arrière-plan (optionnel) */
+			.particles {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				pointer-events: none;
+			}
+
+			.particle {
+				position: absolute;
+				width: 4px;
+				height: 4px;
+				background: rgba(255, 255, 255, 0.5);
+				border-radius: 50%;
+				animation: particleFloat 20s infinite;
+			}
+
+			@keyframes particleFloat {
+				0% {
+					transform: translateY(100vh) translateX(0);
+					opacity: 0;
+				}
+				10% {
+					opacity: 1;
+				}
+				90% {
+					opacity: 1;
+				}
+				100% {
+					transform: translateY(-100px) translateX(100px);
+					opacity: 0;
+				}
+			}
+
+			/* Responsive amélioré */
+			@media screen and (max-width: 736px) {
+				#top {
+					padding: 4em 0 !important;
+				}
+
+				.box {
+					margin-bottom: 2em;
+				}
+
+				#nav a::before {
+					display: none;
+				}
+
+				#nav .container {
+					flex-direction: column !important;
+					gap: 0.5em;
+				}
+
+				#nav .nav-name {
+					margin-bottom: 0.5em;
+				}
+
+				#nav ul {
+					width: 100%;
+					text-align: center;
+				}
+			}
+
+			/* Loading animation */
+			body.is-preload {
+				opacity: 0;
+			}
+
+			body {
+				opacity: 1;
+				transition: opacity 0.5s ease;
+			}
+
+			/* Curseur personnalisé (optionnel) */
+			* {
+				cursor: default;
+			}
+
+			a, button, input[type="submit"], input[type="reset"] {
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Nav -->
+		<nav id="nav">
+			<div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+				<div class="nav-name">
+					<a href="#top" style="font-weight: 700; font-size: 1.2em; color: white; text-decoration: none;">Samba DIAKHO</a>
+				</div>
+				<ul style="margin-bottom: 0;">
+					<li><a href="#top">Top</a></li>
+					<li><a href="#work">Work</a></li>
+					<li><a href="#portfolio">Portfolio</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</div>
+		</nav>
+
+		<!-- Home -->
+		<article id="top" class="wrapper style1">
+			<div class="particles">
+				<div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+				<div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+				<div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+				<div class="particle" style="left: 40%; animation-delay: 1s;"></div>
+				<div class="particle" style="left: 50%; animation-delay: 3s;"></div>
+				<div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+				<div class="particle" style="left: 70%; animation-delay: 2.5s;"></div>
+				<div class="particle" style="left: 80%; animation-delay: 4.5s;"></div>
+				<div class="particle" style="left: 90%; animation-delay: 1.5s;"></div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-4 col-5-large col-12-medium">
+						<span class="image fit profile-pic"><img src="images/samba.jpg" alt="Samba" /></span>
+					</div>
+					<div class="col-8 col-7-large col-12-medium">
+						<header>
+							<h1>Hi! here is <strong>SAMBA</strong>.</h1>
+						</header>
+						<p>And this is <strong>my portfolio</strong>, Happy to share my work with you.</p>
+						<a href="#work" class="button large scrolly">Learn about what I do</a>
+					</div>
+				</div>
+			</div>
+		</article>
+
+		<!-- Work -->
+		<article id="work" class="wrapper style2">
+			<div class="container">
+				<header>
+					<h2>My Technical Skills</h2>
+					<p>"Data, analytics, and machine learning working together."</p>
+				</header>
+				
+				<!-- Programmation & Outils -->
+				<div class="row aln-center" style="margin-bottom: 3em;">
+					<div class="col-12">
+						<h3 style="color: #6C63FF; margin-bottom: 1.5em; font-size: 1.8em;"> Programming & Tools</h3>
+					</div>
+					<div class="col-12" style="text-align: center; margin-bottom: 2em;">
+						<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" style="margin: 0.3em;">
+						<img src="https://img.shields.io/badge/R-276DC3?style=for-the-badge&logo=r&logoColor=white" alt="R" style="margin: 0.3em;">
+						<img src="https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="SQL" style="margin: 0.3em;">
+						<img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" style="margin: 0.3em;">
+						<img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" style="margin: 0.3em;">
+						<img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git" style="margin: 0.3em;">
+						<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" style="margin: 0.3em;">
+						<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" style="margin: 0.3em;">
+					</div>
+				</div>
+
+				<!-- Libraries & Frameworks -->
+				<div class="row aln-center" style="margin-bottom: 3em;">
+					<div class="col-12">
+						<h3 style="color: #6C63FF; margin-bottom: 1.5em; font-size: 1.8em;"> Libraries & Frameworks</h3>
+					</div>
+					<div class="col-12" style="text-align: center; margin-bottom: 2em;">
+						<img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas" style="margin: 0.3em;">
+						<img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy" style="margin: 0.3em;">
+						<img src="https://img.shields.io/badge/Scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-learn" style="margin: 0.3em;">
+						<img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" alt="TensorFlow" style="margin: 0.3em;">
+						<img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch" style="margin: 0.3em;">
+					</div>
+				</div>
+
+				<!-- Visualisation & BI -->
+				<div class="row aln-center" style="margin-bottom: 3em;">
+					<div class="col-12">
+						<h3 style="color: #6C63FF; margin-bottom: 1.5em; font-size: 1.8em;"> Data Visualization & BI</h3>
+					</div>
+					<div class="col-12" style="text-align: center; margin-bottom: 2em;">
+						<img src="https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black" alt="Power BI" style="margin: 0.3em;">
+						<img src="https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white" alt="Plotly" style="margin: 0.3em;">
+						<img src="https://img.shields.io/badge/Matplotlib-11557c?style=for-the-badge" alt="Matplotlib" style="margin: 0.3em;">
+						<img src="https://img.shields.io/badge/Seaborn-7DB0BC?style=for-the-badge" alt="Seaborn" style="margin: 0.3em;">
+					</div>
+				</div>
+
+				<!-- Cloud & Big Data -->
+				<div class="row aln-center" style="margin-bottom: 3em;">
+					<div class="col-12">
+						<h3 style="color: #6C63FF; margin-bottom: 1.5em; font-size: 1.8em;"> Cloud & Big Data</h3>
+					</div>
+					<div class="col-12" style="text-align: center; margin-bottom: 2em;">
+						<img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white" alt="AWS" style="margin: 0.3em;">
+						<img src="https://img.shields.io/badge/Google_Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white" alt="Google Cloud" style="margin: 0.3em;">
+						<img src="https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white" alt="Azure" style="margin: 0.3em;">
+						<img src="https://img.shields.io/badge/Apache_Spark-E25A1C?style=for-the-badge&logo=apache-spark&logoColor=white" alt="Apache Spark" style="margin: 0.3em;">
+						<img src="https://img.shields.io/badge/Hadoop-66CCFF?style=for-the-badge&logo=apache-hadoop&logoColor=black" alt="Hadoop" style="margin: 0.3em;">
+					</div>
+				</div>
+
+				<!-- Machine Learning & AI -->
+				<div class="row aln-center">
+					<div class="col-12">
+						<h3 style="color: #6C63FF; margin-bottom: 1.5em; font-size: 1.8em;"> ML & AI</h3>
+					</div>
+					<div class="col-12" style="text-align: center; margin-bottom: 2em;">
+						<style>
+							.ml-badge {
+								display: inline-block;
+								margin: 0.5em;
+								padding: 1em 2em;
+								background: white;
+								border: 2px solid #6C63FF;
+								border-radius: 50px;
+								color: #6C63FF;
+								font-weight: 700;
+								font-size: 0.95em;
+								transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+								box-shadow: 0 4px 15px rgba(108, 99, 255, 0.1);
+								position: relative;
+								overflow: hidden;
+							}
+							.ml-badge::before {
+								content: '';
+								position: absolute;
+								top: 0;
+								left: -100%;
+								width: 100%;
+								height: 100%;
+								background: linear-gradient(135deg, #6C63FF, #8B7FFF);
+								transition: left 0.4s ease;
+								z-index: -1;
+							}
+							.ml-badge:hover {
+								color: white;
+								transform: translateY(-5px);
+								box-shadow: 0 10px 30px rgba(108, 99, 255, 0.3);
+								border-color: #8B7FFF;
+							}
+							.ml-badge:hover::before {
+								left: 0;
+							}
+							.ml-badge span {
+								position: relative;
+								z-index: 1;
+							}
+						</style>
+						<div class="ml-badge">
+							<span> Supervised Learning</span>
+						</div>
+						<div class="ml-badge">
+							<span> Unsupervised Learning</span>
+						</div>
+						<div class="ml-badge">
+							<span> Deep Learning</span>
+						</div>
+						<div class="ml-badge">
+							<span> Natural Language Processing</span>
+						</div>
+						<div class="ml-badge">
+							<span> Computer Vision</span>
+						</div>
+						<div class="ml-badge">
+							<span> Model Optimization</span>
+						</div>
+						<div class="ml-badge">
+							<span> Reinforcement Learning</span>
+						</div>
+						<div class="ml-badge">
+							<span> Time Series Analysis</span>
+						</div>
+					</div>
+				</div>
+
+				<footer style="margin-top: 3em;">
+					<p>Want to see these skills in action?</p>
+					<a href="#portfolio" class="button large scrolly">Explore my projects</a>
+				</footer>
+			</div>
+		</article>
+
+		<!-- Portfolio -->
+		<article id="portfolio" class="wrapper style3">
+			<div class="container">
+				<header>
+					<h2>Some projects I made recently.</h2>
+					<p>Here's a closer look at my journey and my work in the world of data.</p>
+				</header>
+				<div class="row">
+					<div class="col-4 col-6-medium col-12-small">
+						<article class="box style2">
+							<a href="https://github.com/SAMBA-D/Spam-detection-project" class="image featured"><img src="images/spam.jpg" alt="" /></a>
+							<h3><a href="https://github.com/SAMBA-D/Spam-detection-project">Spam Detection</a></h3>
+							<p>A supervised learning model built to detect and filter spam messages with high accuracy.</p>
+						</article>
+					</div>
+					<div class="col-4 col-6-medium col-12-small">
+						<article class="box style2">
+							<a href="https://github.com/SAMBA-D/projet-Spark" class="image featured"><img src="images/vols.jpg" alt="" /></a>
+							<h3><a href="https://github.com/SAMBA-D/projet-Spark"> Flight Delay Analysis</a></h3>
+							<p>A big data processing project using Apache Spark for analyzing flight delays.</p>
+						</article>
+					</div>
+					<div class="col-4 col-6-medium col-12-small">
+						<article class="box style2">
+							<a href="https://github.com/SAMBA-D/Credit-Breton" class="image featured"><img src="images/Crédit-breton.png" alt="" /></a>
+							<h3><a href="https://github.com/SAMBA-D/Credit-Breton">Credit Breton</a></h3>
+							<p>A Data analysis project for analyzing credit risk in the Breton region.</p>
+						</article>
+					</div>
+				</div>
+				<footer>
+					<p>Interested in collaborating?</p>
+					<a href="#contact" class="button large scrolly">Get in touch with me</a>
+				</footer>
+			</div>
+		</article>
+
+		<!-- Contact -->
+		<article id="contact" class="wrapper style4">
+			<div class="container medium">
+				<header>
+					<h2>Let's work together.</h2>
+					<p>Have a project in mind? Let's discuss how data can drive your success.</p>
+				</header>
+				<div class="row">
+					<div class="col-12">
+						<form method="POST" action="https://formspree.io/f/mzdabone">
+							<div class="row">
+								<div class="col-6 col-12-small">
+									<input type="text" name="name" id="name" placeholder="Name" required />
+								</div>
+								<div class="col-6 col-12-small">
+									<input type="email" name="email" id="email" placeholder="Email" required />
+								</div>
+								<div class="col-12">
+									<input type="text" name="subject" id="subject" placeholder="Subject" required />
+								</div>
+								<div class="col-12">
+									<textarea name="message" id="message" placeholder="Message" required></textarea>
+								</div>
+								<div class="col-12">
+									<ul class="actions">
+										<li><input type="submit" value="Send Message" /></li>
+										<li><input type="reset" value="Clear Form" class="alt" /></li>
+									</ul>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="col-12">
+						<hr />
+						<h3>Find me on ...</h3>
+						<ul class="social">
+							<li><a href="https://x.com/noreynii02" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="https://www.facebook.com/samba.diakho1?locale=fr_CA" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="https://wa.me/5146328559" class="icon brands fa-whatsapp"><span class="label">WhatsApp</span></a></li>
+							<li><a href="https://www.linkedin.com/in/samba-diakho-57bb27246/" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+							<li><a href="https://github.com/SAMBA-D" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+							<li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=sambadiakho92@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+						</ul>
+						<hr />
+					</div>
+				</div>
+				<footer>
+					<ul id="copyright">
+						<li>&copy; 2026 Samba. All rights reserved.</li><li>Design: Modern Portfolio</li>
+					</ul>
+				</footer>
+			</div>
+		</article>
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+		<script>
+			// Navigation scroll effect
+			window.addEventListener('scroll', function() {
+				const nav = document.getElementById('nav');
+				if (window.scrollY > 50) {
+					nav.classList.add('scrolled');
+				} else {
+					nav.classList.remove('scrolled');
+				}
+			});
+
+			// Intersection Observer pour les animations
+			const observerOptions = {
+				threshold: 0.1,
+				rootMargin: '0px 0px -50px 0px'
+			};
+
+			const observer = new IntersectionObserver(function(entries) {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						entry.target.style.opacity = '1';
+						entry.target.style.transform = 'translateY(0)';
+					}
+				});
+			}, observerOptions);
+
+			document.querySelectorAll('.fade-in').forEach(el => {
+				observer.observe(el);
+			});
+
+			// Parallax effect léger sur le scroll
+			window.addEventListener('scroll', function() {
+				const scrolled = window.pageYOffset;
+				const parallax = document.querySelector('#top .particles');
+				if (parallax) {
+					parallax.style.transform = 'translateY(' + scrolled * 0.3 + 'px)';
+				}
+			});
+		</script>
+	</body>
+</html>
